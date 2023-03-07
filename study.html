@@ -5,7 +5,7 @@
     </header>
     <style>
         .main{width: 800px; margin: auto; padding-top: 200px;}
-        .question,.hint,.answer{width: 100%; line-height: 30px; height: 30px; text-align: center;}
+        .question,.hint,.answer{width: 100%; line-height: 30px; text-align: center;}
         .bottom{width: 100px; margin: auto; margin-top: 20px;}
     </style>
     <body class="main">
@@ -13,14 +13,14 @@
         <div class="hint" id="hint">***</div>
         <div class="bottom"><input onkeydown="keyup_submit(event);" class="answer" id="answer" value="" /></div>
         <div class="bottom">
-            <button onclick="ok()">认识</button>&nbsp;&nbsp;
+            <button onclick="ok()">确定</button>&nbsp;&nbsp;
             <button onclick="forget()">忘了</button>
         </div>
     </body>
     <script>
         var answer = "";
         //改这儿
-        var txt = "学习:study:提示,ち:chi,∈:属于";
+        var txt = "题目：啦啦，可以<br>换行:答案:提示,题目2:答案2";
         //end
         var txtoary = txt.split(',');
         var txtary = randomTxt(txtoary);
@@ -55,8 +55,8 @@
                     question = dtm[0];
                     answer = dtm[1];
                     hint = "";
-                    if(!(typeof(tmary[2]) == "undefined")){
-                        hint = tmary[2];
+                    if(!(typeof(dtm[2]) == "undefined")){
+                        hint = dtm[2];
                     }
                     document.getElementById('question').innerHTML=question;
                     document.getElementById('hint').innerHTML="***";
