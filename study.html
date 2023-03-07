@@ -35,10 +35,11 @@
         var max = txtary.length;
         max = max-1;
         var maxstr = tmary[max];
+        console.log(maxstr);
         function ok(){
-            var answer = document.getElementById('answer').value;
+            var reply = document.getElementById('answer').value;
             document.getElementById('answer').value="";
-            if(answer==answer){
+            if(answer==reply){
                 //alert("正确");
                 //document.getElementById('hint').innerHTML="ok";
                 dq++;
@@ -61,6 +62,7 @@
             document.getElementById('hint').innerHTML=answer;
             if(maxstr!=dqstr){
                 txtary.push(dqstr);
+                maxstr = dqstr;
                 max++;
             }
         }
