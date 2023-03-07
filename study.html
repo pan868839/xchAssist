@@ -20,7 +20,7 @@
     <script>
         var answer = "";
         //改这儿
-        var txt = "学习:study,ち:chi,∈:属于";
+        var txt = "学习:study:提示,ち:chi,∈:属于";
         //end
         var txtoary = txt.split(',');
         var txtary = randomTxt(txtoary);
@@ -30,6 +30,10 @@
         var dqstr = txtary[0];
         var question = tmary[0];
         var answer = tmary[1];
+        var hint = "";
+        if(!(typeof(tmary[2]) == "undefined")){
+            hint = tmary[2];
+        }
         document.getElementById('question').innerHTML=question;
         var dq = 0;
         var max = txtary.length;
@@ -50,6 +54,10 @@
                     dtm = txtary[dq].split(':');
                     question = dtm[0];
                     answer = dtm[1];
+                    hint = "";
+                    if(!(typeof(tmary[2]) == "undefined")){
+                        hint = tmary[2];
+                    }
                     document.getElementById('question').innerHTML=question;
                     document.getElementById('hint').innerHTML="***";
                 }
@@ -59,7 +67,11 @@
             }
         }
         function forget(){
-            document.getElementById('hint').innerHTML=answer;
+            var hintStr = answer;
+            if(hint!=""){
+                hintStr = answer+"["+hint+"]";
+            }
+            document.getElementById('hint').innerHTML=hintStr;
             if(maxstr!=dqstr){
                 txtary.push(dqstr);
                 maxstr = dqstr;
