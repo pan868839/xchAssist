@@ -1,26 +1,32 @@
 <html>
     <header>
+        <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" >
         <title>心持恒辅助背诵</title>
         <meta charset="UTF-8">
     </header>
     <style>
-        .main{width: 800px; margin: auto; padding-top: 200px;}
+        .top{width: 100%; height: 30%;}
+        .main{margin: auto;}
         .question,.hint,.answer{width: 100%; line-height: 30px; text-align: center;}
         .bottom{width: 100px; margin: auto; margin-top: 20px;}
     </style>
-    <body class="main">
-        <div class="question" id="question">one</div>
-        <div class="hint" id="hint">***</div>
-        <div class="bottom"><input onkeydown="keyup_submit(event);" class="answer" id="answer" value="" /></div>
-        <div class="bottom">
-            <button onclick="ok()">确定</button>&nbsp;&nbsp;
-            <button onclick="forget()">忘了</button>
+    <body>
+        <div class="top"></div>
+        <div class="main">
+            <div class="question" id="question">one</div>
+            <div class="hint" id="hint">***</div>
+            <div class="bottom"><input onkeydown="keyup_submit(event);" class="answer" id="answer" value="" /></div>
+            <div class="bottom">
+                <button onclick="ok()">确定</button>&nbsp;&nbsp;
+                <button onclick="forget()">忘了</button>
+            </div>
         </div>
     </body>
     <script>
         var answer = "";
         //改这儿
         var txt = "题目：啦啦，可以<br>换行:答案:提示,题目2:答案2";
+        txt += "题目3:答案3";
         //end
         var txtoary = txt.split(',');
         var txtary = randomTxt(txtoary);
