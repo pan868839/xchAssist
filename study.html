@@ -1,7 +1,7 @@
 <html>
     <header>
         <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" >
-        <title>心持恒辅助背诵</title>
+        <title>50音图,心持恒</title>
         <meta charset="UTF-8">
     </header>
     <style>
@@ -9,6 +9,7 @@
         .main{margin: auto;}
         .question,.hint,.answer{width: 100%; line-height: 30px; text-align: center;}
         .bottom{width: 100px; margin: auto; margin-top: 20px;}
+        .ok{ width: 100%; min-height: 30px;}
     </style>
     <body>
         <div class="top"></div>
@@ -17,9 +18,9 @@
             <div class="hint" id="hint">***</div>
             <div class="bottom"><input onkeydown="keyup_submit(event);" class="answer" id="answer" value="" /></div>
             <div class="bottom">
-                <button onclick="ok()">确定</button>&nbsp;&nbsp;
-                <button onclick="forget()">忘了</button>
+                <button class="ok" onclick="ok()">确定</button>
             </div>
+            <div class="hint" id="errorConStr"></div>
         </div>
     </body>
     <script>
@@ -30,9 +31,9 @@
         //end
         var txtoary = txt.split(',');
         var txtary = randomTxt(txtoary);
-        console.log(txtary);
+        //console.log(txtary);
         var tmary = txtary[0].split(':');
-        console.log(tmary);
+        //console.log(tmary);
         var dqstr = txtary[0];
         var question = tmary[0];
         var answer = tmary[1];
@@ -45,11 +46,15 @@
         var max = txtary.length;
         max = max-1;
         var maxstr = tmary[max];
-        console.log(maxstr);
+        var errorCoun = 0;
+        var errorAry = [];
+        //console.log(maxstr);
         function ok(){
             var reply = document.getElementById('answer').value;
             document.getElementById('answer').value="";
-            if(answer==reply){
+            if(reply=="ex1"||reply=="ex2"||reply=="ex3"){
+                errorJG(reply);
+            }else if(answer==reply){
                 //alert("正确");
                 //document.getElementById('hint').innerHTML="ok";
                 dq++;
@@ -82,6 +87,25 @@
                 txtary.push(dqstr);
                 maxstr = dqstr;
                 max++;
+                //错误数据统计
+                i = 1;
+                newLs = 0;
+                if(errorCoun>0){
+                    for(var j=0;j<errorCoun;j++){
+                        if(errorAry[j][0]==dqstr){
+                            newLs=1;
+                            i = errorAry[j][1];
+                            i++;
+                            errorAry[j][1]=i;
+                        }
+                    }
+                }
+                if(newLs==0){
+                    var errorLs = [dqstr,i];
+                    errorAry.push(errorLs);
+                    errorCoun++;
+                    //console.log(errorAry);
+                }
             }
         }
         function keyup_submit(e){ 
@@ -99,6 +123,23 @@
                 ary[randomI] = temp;
             }
             return ary;
+        }
+        function errorJG(input){
+            if(input=="ex3"){
+                document.getElementById('errorConStr').innerHTML="";
+            }else{
+                var str = "";
+                var str2 = "";
+                for(var j=0;j<errorCoun;j++){
+                    str += errorAry[j][0]+"&nbsp;错"+errorAry[j][1]+"次<br>";
+                    str2 += errorAry[j][0]+",";
+                }
+                if(input=="ex1"){
+                    document.getElementById('errorConStr').innerHTML=str;
+                }else{
+                    document.getElementById('errorConStr').textContent=str2;
+                }
+            }
         }
     </script>
 </html>
